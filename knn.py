@@ -6,7 +6,9 @@ from scipy.spatial.distance import cdist
 from scipy import stats
 import numbers
 
-def knn(target, attributes, k_neighbors, aggregation_method="mean", numeric_distance="euclidean",
+from hamming import calculate_weighted_hamming
+
+def knn_implementation(target, attributes, k_neighbors, aggregation_method="mean", numeric_distance="euclidean",
                categorical_distance="jaccard", missing_neighbors_threshold = 0.5):
     """ INPUT
         - target                        = a vector of n values with missing values that you want to impute. The length has
@@ -36,19 +38,19 @@ def knn(target, attributes, k_neighbors, aggregation_method="mean", numeric_dist
 
     # Check for possible errors
     if number_observations < 3:
-        print "Not enough observations."
+        print("Not enough observations.")
         return None
     if attributes.shape[0] != number_observations:
-        print "The number of observations in the attributes variable is not matching the target variable length."
+        print("The number of observations in the attributes variable is not matching the target variable length.")
         return None
     if k_neighbors > number_observations or k_neighbors < 1:
-        print "The range of the number of neighbors is incorrect."
+        print("The range of the number of neighbors is incorrect.")
         return None
     if aggregation_method not in possible_aggregation_method:
-        print "The aggregation method is incorrect."
+        print("The aggregation method is incorrect.")
         return None
     if not is_target_numeric and aggregation_method != "mode":
-        print "The only method allowed for categorical target variable is the mode."
+        print("The only method allowed for categorical target variable is the mode.")
         return None
 
     # Make sure the data are in the right format

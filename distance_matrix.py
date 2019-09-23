@@ -6,6 +6,8 @@ from scipy.spatial.distance import cdist
 from scipy import stats
 import numbers
 
+from hamming import calculate_weighted_hamming
+
 def get_distance_matrix(data, numeric_distance = "euclidean", categorical_distance = "jaccard"):
     possible_continuous_distances = ["euclidean", "cityblock"]
     possible_binary_distances = ["euclidean", "jaccard", "hamming", "weighted-hamming"]
@@ -20,10 +22,10 @@ def get_distance_matrix(data, numeric_distance = "euclidean", categorical_distan
 
     # Check the content of the distances parameter
     if numeric_distance not in possible_continuous_distances:
-        print "The continuous distance " + numeric_distance + " is not supported."
+        print(f"The continuous distance {numeric_distance} is not supported.")
         return None
     elif categorical_distance not in possible_binary_distances:
-        print "The binary distance " + categorical_distance + " is not supported."
+        print(f"The binary distance {categorical_distance} is not supported.")
         return None
 
     # Separate the data frame into categorical and numeric attributes and normalize numeric data
@@ -34,9 +36,7 @@ def get_distance_matrix(data, numeric_distance = "euclidean", categorical_distan
         data_numeric = (data_numeric - data_numeric.mean()) / (data_numeric.max() - data_numeric.min())
         data_categorical = data.iloc[:, [not x for x in is_numeric]]
 
-    # Replace missing values with column mean for numeric values and mode for categorical ones. With the mode, it
-    # triggers a warning: "SettingWithCopyWarning: A value is trying to be set on a copy of a slice from a DataFrame"
-    # but the value are properly replaced
+    # Replace missing values with column mean for numeric values and mode for categorical ones.
     if is_mixed_type:
         data_numeric.fillna(data_numeric.mean(), inplace=True)
         for x in data_categorical:
@@ -63,13 +63,13 @@ def get_distance_matrix(data, numeric_distance = "euclidean", categorical_distan
         result_matrix = cdist(data, data, metric=numeric_distance)
     elif is_all_categorical:
         if categorical_distance == "weighted-hamming":
-            result_matrix = weighted_hamming(data)
+            result_matrix = calculate_weighted_hamming(data)
         else:
             result_matrix = cdist(data, data, metric=categorical_distance)
     else:
         result_numeric = cdist(data_numeric, data_numeric, metric=numeric_distance)
         if categorical_distance == "weighted-hamming":
-            result_categorical = weighted_hamming(data_categorical)
+            result_categorical = calculate_weighted_hamming(data_categorical)
         else:
             result_categorical = cdist(data_categorical, data_categorical, metric=categorical_distance)
         result_matrix = np.array([[1.0*(result_numeric[i, j] * number_of_numeric_var + result_categorical[i, j] *
