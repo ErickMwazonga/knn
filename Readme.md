@@ -1,3 +1,14 @@
+## KNN Project
+
+---
+
+Students
+
+1. Mwandeje E. Mwazonga - 111778
+2. William Kamau – 072291
+
+---
+
 ## Handle Missing Values using Weighted Hamming Distance
 
 ### Problem
@@ -17,11 +28,16 @@ Use the [Titanic Dataset](https://www.kaggle.com/c/titanic/data) to Predict whic
 ### Implementation Algorithm
 
 1. Remove Irrelevant columns
-   Remove columns which according to me do not make any contribution to our prediction.
+   `Remove columns which according to me do not make any contribution to our prediction.`
 
-2. Compute global mean for numeric column and global mode for categorical ones.
+2. Calculate Hamming distance on categorical values.
+   `For one variable, it is equal to 1 if the values between point A and point B are different, else it is equal the relative frequency of the distribution of the value across the variable. For multiple variables, the harmonic mean is computed up to a constant factor.`
 
-3. Apply the knn_impute function
+3. Compute global mean for numeric column and global mode for categorical ones.
+
+4.
+
+Apply the knn_impute function
 
 4. Build the predictive model
 
