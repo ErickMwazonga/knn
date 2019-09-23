@@ -60,3 +60,16 @@ Use the [Titanic Dataset](https://www.kaggle.com/c/titanic/data) to Predict whic
    `cd knn`
 3. Install required packages
    `pip install -r requirements.txt`
+
+### Results
+
+Normal Implementation:
+`specificity = 79%; precision = 63%`
+
+Our KNN Implementation Results:
+`specificity = 80%; precision = 66%`
+
+### Comments
+
+Clearly, from the results we can deduce that our proposal can be improved to provide efficiency in handling
+null values with the new algorithm as opposed to the traditional methods e.g mean, mode e.t.c
