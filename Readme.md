@@ -1,8 +1,12 @@
 ## KNN Project
 
+#### Note:
+
+This Project is for the purpose of Strathmore Machine Learning classwork and should not be used for any othe purpose other than that
+
 ---
 
-Students
+#### Students
 
 1. Mwandeje E. Mwazonga - 111778
 2. William Kamau – 072291
