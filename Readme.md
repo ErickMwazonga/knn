@@ -40,16 +40,14 @@ Use the [Titanic Dataset](https://www.kaggle.com/c/titanic/data) to Predict whic
    - Categorical
      For ordinal values, provide a numerical representation taking the order into account.
      Categorical variables are transformed into a set of binary ones.
-     If both continuous and categorical distance are provided, a Gower-like distance is computed and the numeric
-     variables are all normalized in the process.
+     If both continuous and categorical distance are provided, a Gower-like distance is computed and the numeric variables are all normalized in the process.
      If there are missing values, the mean is computed for numerical attributes and the mode for categorical ones.
 
-   Note: If weighted-hamming distance is chosen, the computation time increases a lot since it is not coded in C
-   like other distance metrics provided by scipy
-
-4. Apply the impute function using KNN implementation
-
-5. Build the predictive model
+4. Apply the imputation strategy to get the distance using KNN implementation
+   Replace the missing values within the target variable based on its k nearest neighbors identified with the
+   attributes variables. If more than 50% of its neighbors are also missing values, the value is not modified and
+   remains missing. If there is a problem in the parameters provided, returns None.
+   If to many neighbors also have missing values, leave the missing value of interest unchanged.
 
 ### Testing the Model
 
