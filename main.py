@@ -4,7 +4,7 @@ from collections import defaultdict
 from scipy.stats import hmean
 import numbers
 
-from knn import knn_implementation
+from .knn import knn_implementation
 
 def main():
     df = pd.read_csv("titanic_dataset.csv") 

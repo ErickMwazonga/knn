@@ -6,7 +6,7 @@ from scipy.spatial.distance import cdist
 from scipy import stats
 import numbers
 
-from hamming import calculate_weighted_hamming
+from .hamming import calculate_weighted_hamming
 
 def get_distance_matrix(data, numeric_distance = "euclidean", categorical_distance = "jaccard"):
     possible_continuous_distances = ["euclidean", "cityblock"]
